@@ -1,0 +1,5 @@
+- hosts: esxi_hosts
+  become_method: sudo
+  gather_facts: true
+  roles:
+   - role: dingo.esxi_tls

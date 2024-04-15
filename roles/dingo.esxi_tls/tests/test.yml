@@ -2,4 +2,4 @@
 - hosts: localhost
   remote_user: root
   roles:
-    - dingo.esxi_ssl
+    - dingo.esxi_tls

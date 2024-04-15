@@ -1,4 +1,3 @@
-
   - name: copy key to host
     copy:
       src: "/tmp/{{ dns_name }}.pem"
