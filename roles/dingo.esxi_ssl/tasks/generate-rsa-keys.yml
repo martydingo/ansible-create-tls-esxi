@@ -2,15 +2,16 @@
     community.crypto.openssl_privatekey:
       path: "/tmp/{{ dns_name }}.pem"
       return_content: True
-      size: 2048
+      size: 4096
     delegate_to: localhost
     register: generated_private_key
 
   - name: generate csr
     community.crypto.openssl_csr:
       path: "/tmp/{{ dns_name }}.csr"
-      privatekey_content: "{{ generated_private_key.privateKey }}"
+      privatekey_content: "{{ generated_private_key.privatekey }}"
       common_name: "{{ dns_name }}"
       subject_alt_name: "DNS:{{ dns_name | join(',DNS:') }}"
       return_content: True
     delegate_to: localhost
+    register: generated_csr

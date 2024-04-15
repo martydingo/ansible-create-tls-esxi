@@ -1,0 +1,13 @@
+    - name: create acme challenge
+      acme_certificate:
+        acme_version: 2
+        terms_agreed: yes
+        account_key_content: "{{ acmeAccountKey }}"
+        src: "{{ certs_path }}/{{ crt_common_name }}.csr"
+        cert: "{{ certs_path }}/{{ crt_common_name }}.crt"
+        challenge: dns-01
+        # acme_directory: https://acme-v02.api.letsencrypt.org/directory
+        acme_directory: https://acme-staging-v02.api.letsencrypt.org/directory
+        remaining_days: 60
+      register: challenge
+      delegate_to: localhost
