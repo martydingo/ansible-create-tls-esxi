@@ -9,7 +9,7 @@
       type: TXT
       state: absent
     delegate_to: localhost
-    
+
   - name: Create ACME DNS-01 challenge
     acme_certificate:
       acme_version: 2
@@ -36,6 +36,7 @@
       type: TXT
       value: "{{ acme_challenge.challenge_data_dns.values() | last | last }}"
     delegate_to: localhost
+    when: acme_challenge is changed
 
   - name: Validate ACME DNS-01 challenge
     acme_certificate:
