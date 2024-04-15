@@ -1,0 +1,29 @@
+fields:
+  - id: RFC2136_TSIG_KEY_PRIMARY_NAMESERVER
+    type: string
+    label: Primary Nameserver
+    secret: false
+  - id: RFC2136_TSIG_KEY_NAME
+    type: string
+    label: TSIG Key Name
+    secret: false
+  - id: RFC2136_TSIG_KEY_ALGORITHM
+    type: string
+    label: TSIG Key Algorithm
+    secret: false
+  - id: RFC2136_TSIG_KEY_SECRET
+    type: string
+    label: TSIG Key Secret
+    secret: true
+required:
+  - RFC2136_TSIG_KEY_NAME
+  - RFC2136_TSIG_KEY_ALGORITHM
+  - RFC2136_TSIG_KEY_SECRET
+
+
+extra_vars:
+  rfc2136TsigKey:
+    name: '{{ RFC2136_TSIG_KEY_NAME }}'
+    secret: '{{ RFC2136_TSIG_KEY_SECRET }}'
+    algorithm: '{{ RFC2136_TSIG_KEY_ALGORITHM }}'
+    primaryNS: '{{ RFC2136_TSIG_KEY_PRIMARY_NAMESERVER }}'
