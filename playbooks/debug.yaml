@@ -25,6 +25,11 @@
       delegate_to: localhost
       register: generated_csr
 
+    - name: Debugging generated_csr
+      debug:
+        msg: "{{ generated_csr }}"
+      delegate_to: localhost
+
     - name: Create ACME DNS-01 challenge
       acme_certificate:
         acme_version: 2
@@ -37,11 +42,11 @@
         # acme_directory: https://acme-v02.api.letsencrypt.org/directory
         acme_directory: https://acme-staging-v02.api.letsencrypt.org/directory
         remaining_days: 60
-      register: challenge
+      register: acme_challenge
       delegate_to: localhost
 
-    - name: Debugging generated_csr
+    - name: Debugging acme_challenge
       debug:
-        msg: "{{ generated_csr }}"
+        msg: "{{ acme_challenge }}"
       delegate_to: localhost
 
