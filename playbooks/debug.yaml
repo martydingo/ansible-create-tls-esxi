@@ -55,6 +55,18 @@
         msg: "{{ acme_challenge }}"
       delegate_to: localhost
 
+    - name: Remove old ACME DNS-01 challenge
+      community.general.nsupdate:
+        key_name: "{{ rfc2136TsigKey.name }}"
+        key_algorithm: "{{ rfc2136TsigKey.algorithm }}"
+        key_secret: "{{ rfc2136TsigKey.secret }}"
+        server: "{{ rfc2136TsigKey.primaryNS }}"
+        zone: "{{ dns_name }}"
+        record: "_acme-challenge"
+        type: TXT
+        state: absent
+      delegate_to: localhost
+
     - name: Propagate ACME DNS-01 challenge
       community.general.nsupdate:
         key_name: "{{ rfc2136TsigKey.name }}"

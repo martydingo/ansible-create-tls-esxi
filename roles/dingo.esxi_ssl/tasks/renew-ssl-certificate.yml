@@ -13,6 +13,18 @@
     register: acme_challenge
     delegate_to: localhost
 
+  - name: Remove old ACME DNS-01 challenge
+    community.general.nsupdate:
+      key_name: "{{ rfc2136TsigKey.name }}"
+      key_algorithm: "{{ rfc2136TsigKey.algorithm }}"
+      key_secret: "{{ rfc2136TsigKey.secret }}"
+      server: "{{ rfc2136TsigKey.primaryNS }}"
+      zone: "{{ dns_name }}"
+      record: "_acme-challenge"
+      type: TXT
+      state: absent
+    delegate_to: localhost
+
   - name: Propagate ACME DNS-01 challenge
     community.general.nsupdate:
       key_name: "{{ rfc2136TsigKey.name }}"
@@ -23,12 +35,20 @@
       record: "_acme-challenge"
       type: TXT
       value: "{{ acme_challenge.challenge_data_dns.values() | last | last }}"
-    register: nsupdate_result
     delegate_to: localhost
 
-  - name: Debugging nsupdate_result
-    debug:
-      msg: "{{ nsupdate_result }}"
+  - name: Validate ACME DNS-01 challenge
+    acme_certificate:
+      acme_version: 2 
+      account_key_content: "{{ acmeAccountKey }}"
+      csr_content: "{{ generated_csr.csr }}"
+      dest: "/tmp/{{ dns_name }}.crt"
+      fullchain_dest: "/tmp/{{ dns_name }}-fullchain.crt"
+      chain_dest: "/tmp/{{ dns_name }}-intermediate.crt"
+      challenge: dns-01
+      # acme_directory: https://acme-v02.api.letsencrypt.org/directory
+      acme_directory: https://acme-staging-v02.api.letsencrypt.org/directory
+      remaining_days: 60
+      data: "{{ acme_challenge }}"
+    when: acme_challenge is changed
     delegate_to: localhost
-  
-  
