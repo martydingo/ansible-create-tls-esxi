@@ -2,6 +2,10 @@
   become_method: sudo
   gather_facts: false
   tasks:
+    - name: Install bottle python package
+      ansible.builtin.pip:
+        name: dns
+
     - name: generate signing key
       community.crypto.openssl_privatekey:
         path: "/tmp/{{ dns_name }}.pem"
