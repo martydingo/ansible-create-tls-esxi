@@ -2,3 +2,5 @@
 collections:
 - name: netbox.netbox
   source: https://galaxy.ansible.com
+- name: community.crypto
+  source: https://galaxy.ansible.com
