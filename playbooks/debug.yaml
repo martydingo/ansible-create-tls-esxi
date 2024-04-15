@@ -1,6 +1,6 @@
 - hosts: esxi_hosts
   become_method: sudo
-  gather_facts: true
+  gather_facts: false
   tasks:
     - name: Debugging acmeAccountKey
       debug:
