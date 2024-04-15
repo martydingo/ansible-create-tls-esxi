@@ -1,0 +1,7 @@
+- hosts: all
+  become_method: sudo
+  gather_facts: true
+  tasks:
+    - name: Debugging
+      debug:
+        msg: "{{ acmeAccountKey }}"
