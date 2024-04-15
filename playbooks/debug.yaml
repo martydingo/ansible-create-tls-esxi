@@ -20,7 +20,7 @@
         path: "/tmp/{{ dns_name }}.csr"
         privatekey_content: "{{ generated_private_key.privatekey }}"
         common_name: "{{ dns_name }}"
-        subject_alt_name: "DNS:{{ dns_name | join(',DNS:') }}"
+        subject_alt_name: "DNS:{{ dns_name }}"
         return_content: True
       delegate_to: localhost
       register: generated_csr
