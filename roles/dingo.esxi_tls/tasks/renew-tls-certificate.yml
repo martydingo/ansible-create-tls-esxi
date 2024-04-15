@@ -25,11 +25,6 @@
     register: acme_challenge
     delegate_to: localhost
 
-  - name: Debugging acme_challenge
-    debug:
-      msg: "{{ acme_challenge }}"
-    delegate_to: localhost
-
   - name: Propagate ACME DNS-01 challenge
     community.general.nsupdate:
       key_name: "{{ rfc2136TsigKey.name }}"
