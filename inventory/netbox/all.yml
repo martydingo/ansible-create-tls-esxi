@@ -2,3 +2,4 @@ plugin: netbox.netbox.nb_inventory
 config_context: True
 device_query_filters:
   - has_primary_ip: 'true'
+dns_name: True
