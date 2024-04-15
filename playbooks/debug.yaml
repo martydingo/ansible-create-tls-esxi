@@ -5,4 +5,3 @@
     - name: Debugging
       debug:
         msg: "{{ acmeAccountKey }}"
-      delegate_to: localhost
