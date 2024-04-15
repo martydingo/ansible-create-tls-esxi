@@ -5,6 +5,7 @@
     - name: Install bottle python package
       ansible.builtin.pip:
         name: dns
+      delegate_to: localhost
 
     - name: generate signing key
       community.crypto.openssl_privatekey:
