@@ -41,7 +41,7 @@
       type: TXT
       value: "{{ acme_challenge.challenge_data_dns.values() | last | last }}"
     delegate_to: localhost
-    when: acme_challenge is changed
+    when: (acme_challenge.challenge_data_dns | length) > 0
 
   - name: Validate ACME DNS-01 challenge
     acme_certificate:
