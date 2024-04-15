@@ -1,2 +1,0 @@
-plugin: netbox.netbox.nb_inventory
-config_context: True
