@@ -2,4 +2,4 @@
   become_method: sudo
   gather_facts: true
   roles:
-   - dingo.esxi_tls
+   - '../roles/dingo.esxi_tls'
