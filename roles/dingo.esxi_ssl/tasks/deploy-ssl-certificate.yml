@@ -1,7 +1,7 @@
 
   - name: copy key to host
     copy:
-      src: "{{ certs_path }}/{{ crt_common_name }}.pem"
+      src: "/tmp/{{ dns_name }}.pem"
       dest: "/etc/vmware/ssl/rui.key"
 
   - name: copy cert to host
