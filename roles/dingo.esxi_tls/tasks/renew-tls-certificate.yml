@@ -19,8 +19,8 @@
       dest: "/tmp/{{ dns_name }}.crt"
       fullchain_dest: "/tmp/{{ dns_name }}-fullchain.crt"
       challenge: dns-01
-      # acme_directory: https://acme-v02.api.letsencrypt.org/directory
-      acme_directory: https://acme-staging-v02.api.letsencrypt.org/directory
+      acme_directory: https://acme-v02.api.letsencrypt.org/directory
+      # acme_directory: https://acme-staging-v02.api.letsencrypt.org/directory
       remaining_days: 60
     register: acme_challenge
     delegate_to: localhost
@@ -52,8 +52,8 @@
       fullchain_dest: "/tmp/{{ dns_name }}-fullchain.crt"
       chain_dest: "/tmp/{{ dns_name }}-intermediate.crt"
       challenge: dns-01
-      # acme_directory: https://acme-v02.api.letsencrypt.org/directory
-      acme_directory: https://acme-staging-v02.api.letsencrypt.org/directory
+      acme_directory: https://acme-v02.api.letsencrypt.org/directory
+      # acme_directory: https://acme-staging-v02.api.letsencrypt.org/directory
       remaining_days: 60
       data: "{{ acme_challenge }}"
     when: acme_challenge is changed
