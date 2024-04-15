@@ -1,0 +1,4 @@
+  - name: Install dnspython python package
+    ansible.builtin.pip:
+      name: dnspython
+    delegate_to: localhost

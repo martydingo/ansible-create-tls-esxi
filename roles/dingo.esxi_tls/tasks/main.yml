@@ -1,5 +1,6 @@
 ---
 # tasks file for dingo.esxi_tls
+- include_tasks: install-requirements.yml
 - include_tasks: generate-rsa-keys.yml
-- include_tasks: deploy-tls-certificate.yml
 - include_tasks: renew-tls-certificate.yml
+- include_tasks: deploy-tls-certificate.yml
