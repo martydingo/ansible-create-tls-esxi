@@ -1,4 +1,0 @@
-plugin: netbox.netbox.nb_inventory
-config_context: False
-query_filters:
-  - role: esxi-host
