@@ -1,10 +1,12 @@
-- hosts: localhost
+- hosts: esxi_hosts
   become_method: sudo
   gather_facts: true
   tasks:
     - name: Debugging acmeAccountKey
       debug:
         msg: "{{ acmeAccountKey }}"
+      delegate_to: localhost
     - name: Debugging dns_name
       debug:
         msg: "{{ dns_name }}"
+      delegate_to: localhost
