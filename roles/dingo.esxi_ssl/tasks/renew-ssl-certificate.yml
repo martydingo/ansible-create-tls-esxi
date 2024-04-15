@@ -19,7 +19,7 @@
       key_algorithm: "{{ rfc2136TsigKey.algorithm }}"
       key_secret: "{{ rfc2136TsigKey.secret }}"
       server: "{{ rfc2136TsigKey.primaryNS }}"
-      zone: "{{ dns_name.split('.')[1:] | join('.') }}"
+      zone: "{{ dns_name }}"
       record: "_acme-challenge.{{ dns_name.split('.')[0] }}"
       type: TXT
       value: "{{ acme_challenge.challenge_data_dns.values() | last | last }}"
