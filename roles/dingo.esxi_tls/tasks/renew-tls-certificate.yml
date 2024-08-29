@@ -4,8 +4,8 @@
       key_algorithm: "{{ rfc2136TsigKey.algorithm }}"
       key_secret: "{{ rfc2136TsigKey.secret }}"
       server: "{{ rfc2136TsigKey.primaryNS }}"
-      zone: "{{ dns_zone }}"
-      record: "_acme-challenge.{{ dns_label }}"
+      zone: "{{ (dns_name | split('.'))[1:] | join('.') }}"
+      record: "_acme-challenge.{{ dns_name | split('.') | first }}"
       type: TXT
       state: absent
     delegate_to: localhost
@@ -16,8 +16,8 @@
       terms_agreed: yes
       account_key_content: "{{ acmeAccountKey }}"
       csr_content: "{{ generated_csr.csr }}"
-      dest: "/tmp/{{ dns_label }}.{{ dns_zone }}.crt"
-      fullchain_dest: "/tmp/{{ dns_label }}.{{ dns_zone }}-fullchain.crt"
+      dest: "/tmp/{{ dns_name }}.crt"
+      fullchain_dest: "/tmp/{{ dns_name }}-fullchain.crt"
       challenge: dns-01
       acme_directory: https://acme-v02.api.letsencrypt.org/directory
       # acme_directory: https://acme-staging-v02.api.letsencrypt.org/directory
@@ -31,8 +31,8 @@
       key_algorithm: "{{ rfc2136TsigKey.algorithm }}"
       key_secret: "{{ rfc2136TsigKey.secret }}"
       server: "{{ rfc2136TsigKey.primaryNS }}"
-      zone: "{{ dns_zone }}"
-      record: "_acme-challenge.{{ dns_label }}"
+      zone: "{{ dns_name }}"
+      record: "_acme-challenge"
       type: TXT
       value: "{{ acme_challenge.challenge_data_dns.values() | last | last }}"
     delegate_to: localhost
@@ -43,9 +43,9 @@
       acme_version: 2 
       account_key_content: "{{ acmeAccountKey }}"
       csr_content: "{{ generated_csr.csr }}"
-      dest: "/tmp/{{ dns_label }}.{{ dns_zone }}.crt"
-      fullchain_dest: "/tmp/{{ dns_label }}.{{ dns_zone }}-fullchain.crt"
-      chain_dest: "/tmp/{{ dns_label }}.{{ dns_zone }}-intermediate.crt"
+      dest: "/tmp/{{ dns_name }}.crt"
+      fullchain_dest: "/tmp/{{ dns_name }}-fullchain.crt"
+      chain_dest: "/tmp/{{ dns_name }}-intermediate.crt"
       challenge: dns-01
       acme_directory: https://acme-v02.api.letsencrypt.org/directory
       # acme_directory: https://acme-staging-v02.api.letsencrypt.org/directory

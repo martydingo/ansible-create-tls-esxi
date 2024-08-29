@@ -1,11 +1,11 @@
   - name: copy key to host
     copy:
-      src: "/tmp/{{ dns_label }}.{{ dns_zone }}.pem"
+      src: "/tmp/{{ dns_name }}.pem"
       dest: "/etc/vmware/ssl/rui.key"
 
   - name: copy cert to host
     copy:
-      src: "/tmp/{{ dns_label }}.{{ dns_zone }}-fullchain.crt"
+      src: "/tmp/{{ dns_name }}-fullchain.crt"
       dest: "/etc/vmware/ssl/rui.crt"
     register: cert
 
